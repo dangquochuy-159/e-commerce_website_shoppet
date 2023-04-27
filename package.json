@@ -1,0 +1,22 @@
+{
+  "name": "website_banthucung",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dangquochuy-159/website_banthucung.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dangquochuy-159/website_banthucung/issues"
+  },
+  "homepage": "https://github.com/dangquochuy-159/website_banthucung#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
