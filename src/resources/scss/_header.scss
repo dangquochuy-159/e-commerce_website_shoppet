@@ -1,0 +1,106 @@
+@import 'base';
+
+#header {
+    height: $height-header;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0 !important;
+    .header-search {
+        background-color: $color-white;
+        height: $height-header-search;
+        display: flex;
+        align-items: center;
+        .contain {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .logo {
+                flex: 1;
+            }
+            .logo img {
+                @include width_height(60%, 60%);
+            }
+            .search {
+                flex: 3;
+                form {
+                    display: flex;
+                    border: 1px solid $color-green;
+                    border-radius: 30px;
+                    overflow: hidden;
+                    input {
+                        height: 50px;
+                        flex: 2;
+                        outline: none;
+                        border: none;
+                        padding: 0 20px;
+                        font-size: $fs-text;
+                    }
+                    button {
+                        @include width_height(70px, 50px);
+                        padding: 10px;
+                        border: none;
+                        background-color: $color-green;
+                        i {
+                            color: $color-white;
+                            font-size: $fs-text;
+                        }
+                    }
+                    button:hover {
+                        background-color: $color-green-hover;
+                    }
+                }
+            }
+            .customer {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                a {
+                    text-decoration: none;
+                    font-size: $fs-text;
+                    color: $color-black;
+                    font-weight: 500;
+                    margin: 0;
+                }
+                img {
+                    margin-left: 10px;
+                    @include width_height(50px, 50px);
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+    .header-navbar {
+        height: $height-header-nav;
+        background-color: $color-green;
+        display: flex;
+        align-items: center;
+        .contain {
+            margin-bottom: 0;
+            height: 100%;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            li {
+                height: 100%;
+                display: inline-block;
+                width: 20%;
+                text-align: center;
+
+                a {
+                    display: block;
+                    line-height: $height-header-nav;
+                    font-size: 2rem;
+                    font-weight: 500;
+                    color: $color-white;
+                    text-decoration: none;
+                    text-transform: uppercase;
+                }
+            }
+            li:hover {
+                background-color: $color-green-hover;
+            }
+        }
+    }
+}

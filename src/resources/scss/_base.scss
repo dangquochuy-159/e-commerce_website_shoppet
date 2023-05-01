@@ -1,0 +1,42 @@
+//reset css
+* {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.container,
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+//height - width
+@mixin width_height($width, $height) {
+    width: $width;
+    height: $height;
+}
+$height-number: 150;
+$height-header: ($height-number + px);
+// $height-header-search: 105px;
+$height-header-search: $height-number * 0.7 + px;
+
+$height-header-nav: $height-number * 0.3 + px;
+
+// color:
+$color-green: #269d00;
+$color-green-hover: #2ca603;
+$color-white: #fff;
+$color-black: #000;
+
+//font-size
+$fs-text: 1.6rem;

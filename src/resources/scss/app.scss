@@ -1,5 +1,9 @@
-h1{
-    color: red;
-    font-size: 15px;
-}
+@import 'base';
+@import 'header';
+@import 'footer';
 
+.home {
+    height: 800px;
+    background-color: lightblue;
+    margin-top: $height-header;
+}

@@ -1,0 +1,83 @@
+@import 'base';
+
+#footer {
+    width: 100%;
+    background-color: #f5f1f1;
+    padding-bottom: 24px;
+    .contain-why {
+        background-color: $color-green;
+        padding: 12px;
+        .why-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                background-color: $color-white;
+                padding: 12px;
+                margin-bottom: 8px;
+                @include width_height(40px, 40px);
+                i {
+                    font-size: 2rem;
+                    color: $color-green;
+                }
+            }
+            span {
+                font-size: 1.4rem;
+                color: $color-white;
+            }
+        }
+    }
+    .social-item-pay {
+        height: 80px;
+        background-color: $color-green;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 3px;
+        .social-list,
+        .pay-list {
+            padding: 12px;
+            display: flex;
+            align-items: center;
+        }
+        .social-list {
+            .social-item {
+                margin: 0 12px;
+                padding: 8px;
+                border-radius: 5px;
+                background-color: $color-white;
+                a {
+                    color: $color-black;
+                    i {
+                        font-size: 3rem;
+                    }
+                }
+            }
+        }
+        p {
+            color: $color-white;
+            font-size: 1.4rem;
+            margin: 0;
+        }
+        .pay-list {
+            .pay-item {
+                margin: 0 12px;
+                border-radius: 5px;
+                background-color: $color-white;
+                width: 60px;
+                height: 60px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    max-width: 50px;
+                }
+            }
+        }
+    }
+}
