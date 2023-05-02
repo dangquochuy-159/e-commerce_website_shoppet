@@ -12,14 +12,14 @@ class ProductController {
     // [GET] /admin/danh-sach/san-pham
     listProduct(req, res, next) {
         Promise.all([
+            Category.find({}),
             Product.find({}),
-            Category.find({})
         ])
-            .then(([product, category]) => {
+            .then(([category, product]) => {
                 res.render('admin/listProduct', {
                     layout: false,
-                    product: mutipleMongooseToObject(product),
                     category: mutipleMongooseToObject(category),
+                    product: mutipleMongooseToObject(product),
                 });
             })
             .catch(next)

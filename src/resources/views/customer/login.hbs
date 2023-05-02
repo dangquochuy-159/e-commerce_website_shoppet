@@ -1,0 +1,19 @@
+<style>
+    .login-form {
+        margin-top: 150px
+    }
+</style>
+<div class="login-form">
+    <form method="POST" action="/kiem-tra-dang-nhap" name="form-login">
+        <div class="mb-3">
+            <label for="user-name" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="user-name" aria-describedby="emailHelp" name="user_name">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-login">Đăng Nhập</button>
+    </form>
+</div>

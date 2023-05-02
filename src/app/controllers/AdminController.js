@@ -79,7 +79,7 @@ class AdminController {
         admin
             .save()
             .then(() => {
-                res.redirect("/admin/danh-sach/tai-khoan");
+                return res.redirect('/admin/dang-nhap');
             })
             .catch(next);
     }

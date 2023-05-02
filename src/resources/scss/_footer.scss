@@ -1,6 +1,7 @@
 @import 'base';
 
 #footer {
+    margin-top: $height-header;
     width: 100%;
     background-color: #f5f1f1;
     padding-bottom: 24px;
@@ -32,8 +33,36 @@
             }
         }
     }
+
+    .box-footer {
+        h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        ul {
+            li {
+                i {
+                    margin-right: 10px;
+                }
+                color: #000;
+                font-size: 1.6rem;
+                margin-bottom: 10px;
+                a {
+                    text-decoration: none;
+                    color: #000;
+                }
+                a:hover {
+                    cursor: pointer;
+                    color: blue;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
     .social-item-pay {
-        height: 80px;
+        height: 60px;
         background-color: $color-green;
         display: flex;
         align-items: center;
@@ -54,7 +83,7 @@
                 a {
                     color: $color-black;
                     i {
-                        font-size: 3rem;
+                        font-size: 1.5rem;
                     }
                 }
             }
@@ -69,13 +98,13 @@
                 margin: 0 12px;
                 border-radius: 5px;
                 background-color: $color-white;
-                width: 60px;
-                height: 60px;
+                width: 30px;
+                height: 30px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 img {
-                    max-width: 50px;
+                    max-width: 20px;
                 }
             }
         }

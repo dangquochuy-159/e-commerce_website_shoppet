@@ -53,6 +53,26 @@ class CategoryController {
             .then(() => res.redirect("/admin/danh-sach/loai-san-pham"))
             .catch(next);
     }
+    //[DELETE] /admin/danh-sach/loai-san-pham/:id
+    deleteCategory(req, res, next) {
+        Category.deleteOne({ category_ID: req.params.id })
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
+
+    //[POST] /admin/danh-sach/loai-san-pham/delete-checked
+    deleteCheckedCategory(req, res, next) {
+        switch (req.body.action) {
+            case 'delete':
+                // { $in: req.body.productIds }  --> cú pháp đọc list productIds
+                Category.deleteMany({ category_ID: { $in: req.body.categoryIds } })
+                    .then(() => res.redirect("back"))
+                    .catch(next);
+                break;
+            default:
+                res.json({ message: 'Action invalid' })
+        }
+    }
 }
 
 module.exports = new CategoryController()

@@ -1,0 +1,29 @@
+<style>
+    .register-form {
+        margin-top: 150px
+    }
+</style>
+
+<div class="register-form">
+    <h3>Đăng ký tài khoản</h3>
+    <form method="POST" action="/kiem-tra-dang-ky">
+        <div class="form-group">
+            <label for="name">Tên</label>
+            <input type="text" class="form-control" id="name" name="name" />
+        </div>
+        <div class="form-group">
+            <label for="user_name">Tên đăng nhập</label>
+            <input type="email" class="form-control" id="user_name" name="user_name" />
+        </div>
+        <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <input type="password" class="form-control" id="password" name="password" />
+        </div>
+        <div class="form-group">
+            <label for="image">Ảnh</label>
+            <input type="text" class="form-control" id="image" name="image" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Đăng ký</button>
+    </form>
+</div>

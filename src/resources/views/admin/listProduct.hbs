@@ -44,7 +44,6 @@
         </thead>
         <tbody>
             {{#each product}}
-
             <tr>
                 <td>
                     <div class="form-check">
@@ -54,9 +53,19 @@
                 </td>
                 <th class="text-center" scope="row">{{this.product_ID}}</th>
                 <td class="text-center">{{this.name}}</td>
-                <td class="text-center">{{this.categoryID}}</td>
-                {{!-- {{{id_to_name this.categoryID category}}} --}}
-                {{!-- <td class="text-center"></td> --}}
+                <td class="text-center">
+                    {{#each ../category}}
+
+                    {{#if (compare ../this.categoryID this.category_ID)}}
+                    {{this.name}}
+                    {{else}}
+                    ---
+                    {{/if}}
+                    {{!-- {{{id_to_name ../this.categoryID this}}} --}}
+                    {{/each}}
+                </td>
+
+
 
                 <td class="text-center">{{this.quantity}}</td>
                 <td class="text-center">{{this.price}}</td>
