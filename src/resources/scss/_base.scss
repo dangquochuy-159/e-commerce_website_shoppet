@@ -12,6 +12,7 @@ html {
 
 body {
     margin: 0;
+    height: 100%;
 }
 ul {
     list-style: none;
@@ -73,6 +74,15 @@ $fs-3: 3rem;
 
 .mt-header-30 {
     margin-top: $height-number + 30 + px !important;
+}
+
+.p-lr-0 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+.m-lr-0 {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
 .button-base {

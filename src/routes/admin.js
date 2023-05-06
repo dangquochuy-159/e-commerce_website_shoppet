@@ -39,6 +39,9 @@ router.post('/danh-sach/loai-san-pham/delete-checked', requireLogin.admin, categ
 //ORDER CONTROLLER  
 router.get("/danh-sach/don-dat-hang", requireLogin.admin, adminController.listOrder);
 
+//CUsTOMER
+router.get("/danh-sach/khach-hang", requireLogin.admin, adminController.listCustomer);
+
 
 
 router.get("/", requireLogin.admin, adminController.admin);

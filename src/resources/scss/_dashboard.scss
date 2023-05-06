@@ -1,0 +1,94 @@
+@import 'base';
+
+.dashboard {
+    background-color: #fbf9f9;
+    height: 100vh;
+    .heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 42px;
+        margin: 20px;
+        background-color: $color-main;
+        padding: 10px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        p,
+        a {
+            margin-bottom: 0;
+            font-size: $fs-2;
+            font-weight: 600;
+            color: #fff;
+        }
+        a:hover {
+            color: blue;
+        }
+    }
+    .statis-contain {
+        margin: 20px;
+        .statis {
+            margin-top: 40px;
+            display: flex;
+            padding: 0 !important;
+            // height: 200px;
+            padding: 20px;
+            .statis-item {
+                padding: 0 10px;
+                width: 25%;
+                .statis-item_box {
+                    height: 150px;
+                    border-radius: 5px;
+                    border: 1px solid #e6dfdf;
+                    background-color: #fff;
+                    position: relative;
+                    .number {
+                        padding: 20px;
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: flex-end;
+                        height: 70%;
+
+                        border-bottom: 1px solid #e6dfdf;
+                        p {
+                            font-size: $fs-3;
+                            font-weight: 500;
+                        }
+                    }
+                    .name {
+                        padding: 10px;
+                        display: flex;
+                        align-items: center;
+                        height: 30%;
+                        p {
+                            margin: 0;
+                            color: #ccc;
+                            font-size: $fs-2;
+                        }
+                    }
+                    .card-icon {
+                        position: absolute;
+                        top: -30px;
+                        left: 20px;
+                        width: 100px;
+                        height: 100px;
+                        background-color: red;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 5px;
+                        i {
+                            font-size: 4rem;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+        .chart {
+            .chart-item {
+            }
+        }
+    }
+    .contain-table {
+        margin: 20px;
+    }
+}

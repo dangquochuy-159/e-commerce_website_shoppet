@@ -16,6 +16,7 @@ class ProductController {
             Product.find({}),
         ])
             .then(([category, product]) => {
+                res.locals.session = req.session;
                 res.render('admin/listProduct', {
                     layout: false,
                     category: mutipleMongooseToObject(category),
@@ -29,6 +30,7 @@ class ProductController {
     addProduct(req, res, next) {
         Category.find({})
             .then((category) => {
+                res.locals.session = req.session;
                 res.render('admin/addProduct', {
                     layout: false,
                     category: mutipleMongooseToObject(category),

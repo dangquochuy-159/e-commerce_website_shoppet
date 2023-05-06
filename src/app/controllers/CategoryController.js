@@ -11,6 +11,7 @@ class CategoryController {
     listCategory(req, res, next) {
         Category.find({})
             .then((category) => {
+                res.locals.session = req.session;
                 res.render('admin/listCategory', {
                     layout: false,
                     category: mutipleMongooseToObject(category)
@@ -21,6 +22,7 @@ class CategoryController {
 
     // [GET] /admin/them/loai-san-pham
     addCategory(req, res, next) {
+        res.locals.session = req.session;
         res.render('admin/addCategory', { layout: false });
     }
 
@@ -38,11 +40,13 @@ class CategoryController {
     //[GET] /admin/:id/sua/loai-san-pham
     editCategory(req, res, next) {
         Category.findOne({ category_ID: req.params.id })
-            .then((category) =>
+            .then((category) => {
+                res.locals.session = req.session;
                 res.render("admin/editCategory", {
                     layout: false,
                     category: mongooseToObject(category),
                 })
+            }
             )
             .catch(next);
     }

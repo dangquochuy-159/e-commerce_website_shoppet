@@ -17,6 +17,7 @@ class AdminController {
         const adminId = req.session.adminId;
         Admin.findOne({ admin_ID: req.session.adminId })
             .then((admin) => {
+                res.locals.session = req.session;
                 res.render('admin/dashboard', {
                     layout: false,
                     admin: mongooseToObject(admin)
@@ -27,14 +28,16 @@ class AdminController {
 
     //[GET] /admin/dang-nhap
     login(req, res, next) {
+        res.locals.session = req.session;
         res.render('admin/login', { layout: false })
     }
 
     //[GET] /admin/dang-xuat
     logout(req, res, next) {
         delete req.session.adminId
+        delete req.session.adminImage
+        delete req.session.adminName
         // Chuyển hướng người dùng đến trang đăng nhập
-        console.log("req.session: ", req.session);
         res.redirect('/admin/dang-nhap')
 
     }
@@ -51,8 +54,8 @@ class AdminController {
                     return res.redirect('/admin/dang-nhap');
                 }
                 req.session.adminId = admin.admin_ID;
-                console.log("req.session: ", req.session);
-                console.log("typeof req.session: ", typeof req.session);
+                req.session.adminImage = admin.image;
+                req.session.adminName = admin.name;
                 return res.redirect('/admin');
             })
             .catch((err) => {
@@ -62,6 +65,7 @@ class AdminController {
 
     //[GET] /admin/dang-ky
     register(req, res, next) {
+        res.locals.session = req.session;
         res.render('admin/register', { layout: false });
     }
 
@@ -80,21 +84,10 @@ class AdminController {
     listAdmin(req, res, next) {
         Admin.find({})
             .then((admin) => {
+                res.locals.session = req.session;
                 res.render('admin/listAdmin', {
                     layout: false,
                     admin: mutipleMongooseToObject(admin)
-                });
-            })
-            .catch(next);
-    }
-
-    //[GET] /admin/danh-sach/san-pham
-    listProduct(req, res, next) {
-        Product.find({})
-            .then((product) => {
-                res.render('admin/listProduct', {
-                    layout: false,
-                    product: mutipleMongooseToObject(product)
                 });
             })
             .catch(next);
@@ -104,10 +97,21 @@ class AdminController {
     listOrder(req, res, next) {
         Order.find({})
             .then((order) => {
-
+                res.locals.session = req.session;
                 res.render("admin/listOrder", {
                     layout: false,
                     order: mutipleMongooseToObject(order)
+                })
+            })
+    }
+    //[GET] /danh-sach/tai-khoan
+    listCustomer(req, res, next) {
+        Customer.find({})
+            .then((customer) => {
+                res.locals.session = req.session;
+                res.render('admin/listCustomer', {
+                    layout: false,
+                    customer: mutipleMongooseToObject(customer),
                 })
             })
     }

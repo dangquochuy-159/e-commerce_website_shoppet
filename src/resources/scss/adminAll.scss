@@ -1,0 +1,80 @@
+@import 'base';
+
+.dashboard {
+    .contain-table {
+        max-height: 500px;
+        td {
+            a,
+            button {
+                margin: 5px 5px;
+            }
+            a:hover,
+            button:hover {
+                background-color: blue;
+                color: #fff;
+            }
+        }
+    }
+    .add-category {
+        margin: 20px;
+        label {
+            font-size: $fs-3;
+        }
+        input {
+            height: 42px;
+            font-size: $fs-2;
+            margin: 20px 0;
+        }
+        .btn-add {
+            height: 42px;
+            width: 100px;
+            font-size: $fs-2;
+            background-color: $color-main;
+            border: none;
+        }
+
+        .btn-add:hover {
+            background-color: blue;
+        }
+    }
+
+    form {
+        select {
+            width: 200px;
+            margin: 20px;
+            font-size: $fs-2;
+            height: 42px !important;
+            option {
+            }
+        }
+        .btn-submit-checkall {
+            margin: 0 20px;
+            height: 30px;
+            width: 200px;
+        }
+        .btn-submit-checkall:hover {
+            background-color: $color-main;
+        }
+    }
+    .product {
+        margin-bottom: 30px;
+        select {
+            margin: 10px 0;
+        }
+        margin: 20px;
+        label {
+            font-size: $fs-2;
+            font-weight: 600;
+        }
+        input {
+            height: 40px;
+            font-size: $fs-2;
+            margin: 10px 0;
+        }
+        .btn-submit-checkall {
+            margin: 0;
+            height: 40px;
+            font-size: $fs-2;
+        }
+    }
+}

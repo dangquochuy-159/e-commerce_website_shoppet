@@ -1,0 +1,111 @@
+<link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/icon/fontawesome-free-6.4.0-web/css/all.min.css">
+
+<div class="menu">
+    <div class="text-center info-admin">
+        {{#if session.adminImage}}
+        <img src="{{session.adminImage}}" alt="" class="image">
+        {{else}}
+        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" class="image">
+        {{/if}}
+        {{#if session.adminName}}
+        <p class="text-center">{{session.adminName}}</p>
+        {{else}}
+        <p class="text-center">ADMIN</p>
+        {{/if}}
+    </div>
+    <ul class="menu-list">
+        <li class="menu-item">
+            <a class="menu-item_link" href="/admin">
+                <i class="fa-solid fa-gauge"></i>
+                Dashboard
+            </a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-item_link" href="/admin/danh-sach/tai-khoan">
+                <i class="fa-solid fa-screwdriver"></i>
+                Admin
+            </a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-item_link" href="/admin/danh-sach/khach-hang">
+                <i class="fa-solid fa-user"></i>
+                Customer
+            </a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-item_link" href="/admin/danh-sach/loai-san-pham">
+                <i class="fa-solid fa-list"></i>
+                Category
+            </a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-item_link" href="/admin/danh-sach/san-pham">
+                <i class="fa-solid fa-suitcase"></i>
+                Product
+            </a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-item_link" href="/admin/danh-sach/don-dat-hang">
+                <i class="fa-solid fa-box-open"></i>
+                Order
+            </a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-item_link" href="/admin/dang-ky">
+                <i class="fa-sharp fa-solid fa-pen-nib"></i>
+                Register
+            </a>
+        </li>
+    </ul>
+    <div class="log-out text-center">
+        <a href="/admin/dang-xuat">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+    </div>
+</div>
+
+<script>
+    const menuItems = document.querySelectorAll('.menu-item');
+    const links = document.querySelectorAll('.menu-item_link');
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', function (e) {
+            e.preventDefault();
+            const href = this.querySelector('a').getAttribute('href');
+
+            sessionStorage.setItem('activeMenuItem', href);
+
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            this.classList.add('active');
+        });
+    });
+
+    if (sessionStorage.getItem('activeMenuItem')) {
+        const activeHref = sessionStorage.getItem('activeMenuItem');
+
+        menuItems.forEach(item => {
+            const href = item.querySelector('a').getAttribute('href');
+
+            if (href === activeHref) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', event => {
+            // Chuyển trang mới khi click vào thẻ a
+            window.location.href = link.href;
+            // Ngăn chặn trình duyệt điều hướng đến link
+            //event.preventDefault();
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
