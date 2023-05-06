@@ -6,6 +6,8 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const Admin = require("../models/admin")
 const Product = require("../models/product")
+const Order = require("../models/order")
+const Customer = require("../models/customer")
 
 
 
@@ -13,8 +15,7 @@ class AdminController {
     //[GET] /admin
     admin(req, res, next) {
         const adminId = req.session.adminId;
-        console.log(adminId)
-        Admin.findOne({ _id: req.session.adminId })
+        Admin.findOne({ admin_ID: req.session.adminId })
             .then((admin) => {
                 res.render('admin/dashboard', {
                     layout: false,
@@ -31,15 +32,11 @@ class AdminController {
 
     //[GET] /admin/dang-xuat
     logout(req, res, next) {
-        req.session.destroy(function (err) {
-            if (err) {
-                console.error('Error destroying session:', err);
-                res.status(500).send('Internal server error');
-                return;
-            }
-            // Chuyển hướng người dùng đến trang đăng nhập
-            res.redirect('/admin/dang-nhap')
-        });
+        delete req.session.adminId
+        // Chuyển hướng người dùng đến trang đăng nhập
+        console.log("req.session: ", req.session);
+        res.redirect('/admin/dang-nhap')
+
     }
 
     //[POST] /admin/kiem-tra-dang-nhap
@@ -48,22 +45,17 @@ class AdminController {
             .then((admin) => {
                 admin = mongooseToObject(admin)
                 let isPasswordCorrect = bcrypt.compareSync(req.body.password, admin.password)
-                console.log("isPasswordCorrect: ", isPasswordCorrect)
+
                 // if (!admin || !(password === admin.password))
                 if (!admin || !isPasswordCorrect) {
-                    if (!admin) {
-                        console.log('!admin')
-                    }
-                    if (!isPasswordCorrect) {
-                        console.log('!isPasswordCorrect')
-                    }
                     return res.redirect('/admin/dang-nhap');
                 }
-                req.session.adminId = admin._id;
+                req.session.adminId = admin.admin_ID;
+                console.log("req.session: ", req.session);
+                console.log("typeof req.session: ", typeof req.session);
                 return res.redirect('/admin');
             })
             .catch((err) => {
-                console.log('err2')
                 return res.redirect('/admin/dang-nhap');
             });
     }
@@ -106,6 +98,18 @@ class AdminController {
                 });
             })
             .catch(next);
+    }
+
+    //[GET] /danh-sach/don-dat-hang
+    listOrder(req, res, next) {
+        Order.find({})
+            .then((order) => {
+
+                res.render("admin/listOrder", {
+                    layout: false,
+                    order: mutipleMongooseToObject(order)
+                })
+            })
     }
 
 

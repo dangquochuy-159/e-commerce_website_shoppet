@@ -1,0 +1,93 @@
+@import 'base';
+
+.title {
+    color: $color-main;
+    margin: 50px 0;
+    text-transform: uppercase;
+    font-size: $fs-3;
+    font-weight: 700;
+    position: relative;
+    z-index: 3;
+}
+
+.product_list {
+    .card {
+        padding: 20px !important;
+        border: none !important;
+        img {
+            border: 1px solid $color-main;
+            border-bottom: none;
+            padding: 10px;
+        }
+        .body {
+            min-height: 200px !important;
+            border: 1px solid $color-main;
+            border-top: none !important;
+            padding: 20px !important;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .text-name {
+                font-size: $fs-2;
+                font-weight: 700;
+                text-decoration: none;
+                line-height: 3rem;
+                max-height: 6rem;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+            }
+            .text-salePrice,
+            .text-price {
+                font-size: $fs-1-4;
+                font-weight: 600;
+            }
+            .price-old {
+                text-decoration: line-through;
+                color: #ccc;
+            }
+            .button-list {
+                display: flex;
+                justify-content: space-between;
+                button {
+                    height: 30px;
+                    padding: 0 10px;
+                    border: none;
+                }
+                .btn-buy {
+                    background-color: red;
+                }
+                .btn-cart {
+                    background-color: $color-main;
+                }
+                button:hover {
+                    background-color: blue;
+                }
+            }
+        }
+    }
+}
+
+.slick-prev {
+    color: #000 !important;
+}
+.slick-next {
+    color: #000 !important;
+}
+
+.slick-arrow {
+    color: #000 !important;
+}
+
+#hover-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px #ccc;
+}

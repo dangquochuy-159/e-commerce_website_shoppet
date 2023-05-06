@@ -1,1 +1,25 @@
 @import 'base';
+
+.heading {
+    h1 {
+        color: $color-main;
+        text-align: center;
+        margin: 50px 0;
+        text-transform: uppercase;
+        font-size: $fs-3;
+        font-weight: 700;
+        position: relative;
+        z-index: 3;
+    }
+    .image_list {
+        display: flex;
+        div {
+            display: flex !important;
+            justify-content: center;
+            img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    }
+}

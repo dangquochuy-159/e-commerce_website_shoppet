@@ -1,13 +1,3 @@
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/icon/fontawesome-free-6.4.0-web/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/app.css" />
-</head>
 {{> test}}
 <h1>LIST CATEGORY</h1>
 <form class="mt-4" method="POST" name="container-form" action="/admin/danh-sach/loai-san-pham/delete-checked">
@@ -40,9 +30,9 @@
                 <th class="text-center" scope="row">{{this.category_ID}}</th>
                 <td class="text-center">{{this.name}}</td>
                 <td>
-                    <a href="/admin/{{this.category_ID}}/sua/loai-san-pham" type="button" class="btn btn-link">Sửa</a>
-                    <a href="" type="button" class="btn btn-link" data-id="{{this.category_ID}}" data-toggle="modal"
-                        data-target="#delete-category-modal">Xóa</a>
+                    <a href="/admin/{{this.category_ID}}/sua/loai-san-pham" type="button" class="btn btn-link ">Sửa</a>
+                    <button type="button" class="btn btn-link btn-delete" data-id="{{this.category_ID}}"
+                        data-bs-toggle="modal" data-bs-target="#delete-category-modal">Xóa</button>
                 </td>
             </tr>
             {{!-- trường hợp nếu category không có dữ liệu để hiển thị --}}
@@ -58,28 +48,27 @@
 </form>
 <a href="/admin//them/loai-san-pham">ADD CATEGORY</a>
 
+
 {{! Confirm delete category }}
-<!-- Modal -->
-<div class="modal fade" id="delete-category-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="delete-category-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Xóa sản phẩm?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa danh mục?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 Hành động này không thể khôi phục!!<br>
                 Bạn vẫn muốn xóa sản phẩm?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                <button id="btn-delete-category" type="button" class="btn btn-danger">Xóa</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" id="btn-delete-category" class="btn btn-primary">Xóa</button>
             </div>
         </div>
     </div>
 </div>
+
 {{!-- có tác dụng submit DELETE--}}
 <form name="delete-form" method="POST"></form>
 
@@ -88,58 +77,77 @@
     document.addEventListener('DOMContentLoaded', function () {
         let categoryId
         const deleteForm = document.forms['delete-form']
-        const containerForm = $('form[name="container-form"]')
+        const containerForm = document.querySelector('form[name="container-form"]')
         const btnDeletecategory = document.getElementById('btn-delete-category')
-        const checkboxAll = $('#checkbox-all')
-        const categoryItemCheckbox = $('input[name="categoryIds[]"]')
-        const checkALlSubmitBtn = $('.btn-submit-checkall')
+        const checkboxAll = document.querySelector('#checkbox-all')
+        const categoryItemCheckbox = document.querySelectorAll('input[name="categoryIds[]"]')
+        const checkALlSubmitBtn = document.querySelector('.btn-submit-checkall')
+        const btnDeleteList = document.querySelectorAll('.btn-delete')
 
 
-        $('#delete-category-modal').on('show.bs.modal', function (event) {
-            let button = $(event.relatedTarget);
-            categoryId = button.data('id');
+        //Lấy ra id của danh mục mỗi khi click vào button xóa trên sản phẩm
+        Array.from(btnDeleteList).forEach(function (btnDelete) {
+            btnDelete.onclick = function () {
+                categoryId = this.getAttribute('data-id');
+            }
         })
+
         //khi ấn nút xóa trên form confirm thì thực hiện xóa
         btnDeletecategory.onclick = function () {
-            deleteForm.action = '/admin/danh-sach/loai-san-pham/' + categoryId + '?_method=DELETE'
+            deleteForm.action = '/admin/xoa/loai-san-pham/' + categoryId + '?_method=DELETE'
             deleteForm.submit()
         }
+
         //checkboxAll change
-        checkboxAll.change(function () {
-            let isCheckboxAll = $(this).prop('checked');
-            categoryItemCheckbox.prop('checked', isCheckboxAll);
+        checkboxAll.onchange = function () {
+            let isCheckedAll = this.checked
+            Array.from(categoryItemCheckbox).forEach(function (itemCheck) {
+                itemCheck.checked = isCheckedAll
+            })
             renderCheckAllSunmitBtn()
-        })
-        //categoryItemCheckbox change
-        categoryItemCheckbox.change(function () {
-            let isCheckedAll = categoryItemCheckbox.length === $('input[name="categoryIds[]"]:checked').length
-            checkboxAll.prop('checked', isCheckedAll);
-            renderCheckAllSunmitBtn()
+        }
+
+        //ProductItemCheckbox change
+        Array.from(categoryItemCheckbox).forEach(function (itemCheck) {
+            let isCheck = this.checked
+            itemCheck.onchange = function (e) {
+                e.checked = !isCheck
+                if (countChecked() === categoryItemCheckbox.length) {
+                    checkboxAll.checked = true
+                } else {
+                    checkboxAll.checked = false
+                }
+                renderCheckAllSunmitBtn()
+            }
+
         })
 
         //render lại cái btn submit checkall
         function renderCheckAllSunmitBtn() {
-            let checkedCount = $('input[name="categoryIds[]"]:checked').length
+            let checkedCount = countChecked()
+
+            console.log("checkedCount: ", checkedCount)
+
             if (checkedCount > 0) {
-                checkALlSubmitBtn.attr('disabled', false)
+                checkALlSubmitBtn.disabled = false
             } else {
-                checkALlSubmitBtn.attr('disabled', true)
+                checkALlSubmitBtn.disabled = true
             }
         }
+
+        function countChecked() {
+            let checkedCount = 0
+            Array.from(categoryItemCheckbox).forEach((itemcheck) => {
+                if (itemcheck.checked === true) {
+                    return checkedCount += 1
+                }
+            })
+            return checkedCount
+        }
+
 
 
     })
 
 
 </script>
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>

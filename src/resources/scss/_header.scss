@@ -1,105 +1,133 @@
 @import 'base';
 
-#header {
+header {
+    z-index: 10;
     height: $height-header;
     position: fixed;
     top: 0;
     left: 0;
-    padding: 0 !important;
-    .header-search {
+    background-color: $color-white;
+    a {
+        text-decoration: none;
+    }
+    .header--search {
         background-color: $color-white;
         height: $height-header-search;
-        display: flex;
-        align-items: center;
-        .contain {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .logo {
-                flex: 1;
-            }
-            .logo img {
-                @include width_height(60%, 60%);
-            }
-            .search {
-                flex: 3;
-                form {
+        .row {
+            height: 100%;
+            .col {
+                height: 100%;
+                .logo {
+                    height: 100%;
+                    img {
+                        height: 100%;
+                    }
+                }
+                .search {
+                    height: 100%;
                     display: flex;
-                    border: 1px solid $color-green;
-                    border-radius: 30px;
-                    overflow: hidden;
+                    justify-content: space-between;
+                    align-items: center;
                     input {
-                        height: 50px;
-                        flex: 2;
+                        height: 50%;
+                        width: 80%;
+                        padding: 16px;
+                        border-radius: 50px;
+                        font-size: $fs-1-8;
+                        border-color: $color-main;
                         outline: none;
-                        border: none;
-                        padding: 0 20px;
-                        font-size: $fs-text;
                     }
                     button {
-                        @include width_height(70px, 50px);
-                        padding: 10px;
+                        height: 50%;
+                        width: 19%;
+                        border-radius: 50px;
+                        font-size: $fs-2;
                         border: none;
-                        background-color: $color-green;
-                        i {
-                            color: $color-white;
-                            font-size: $fs-text;
-                        }
+                        background-color: $color-main;
+                        color: $color-white;
                     }
                     button:hover {
-                        background-color: $color-green-hover;
+                        font-size: $fs-3;
                     }
                 }
-            }
-            .customer {
-                flex: 1;
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-                a {
+                .link {
                     text-decoration: none;
-                    font-size: $fs-text;
-                    color: $color-black;
-                    font-weight: 500;
-                    margin: 0;
                 }
-                img {
-                    margin-left: 10px;
-                    @include width_height(50px, 50px);
-                    border-radius: 50%;
+                .account {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    height: 100%;
+                    div {
+                        align-items: center;
+                        border: 1px solid $color-black;
+                        padding: 10px;
+                        border-radius: 10px;
+                        background-color: $color-main;
+
+                        .name-customer {
+                            font-size: $fs-2;
+                            color: $color-white;
+                            margin: 0;
+                        }
+                        img {
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            margin-left: 10px;
+                        }
+                        a:hover {
+                            font-weight: 700;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                .phone {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                    div {
+                        padding: 10px;
+                        align-items: center;
+                        i,
+                        a {
+                            margin: 0 5px;
+                            font-size: $fs-2;
+                            color: $color-main;
+                        }
+                        a {
+                            font-weight: 600;
+                        }
+                        a:hover {
+                            font-weight: 700;
+                            text-decoration: underline;
+                        }
+                    }
                 }
             }
         }
     }
-    .header-navbar {
+    .header--nav {
         height: $height-header-nav;
-        background-color: $color-green;
-        display: flex;
-        align-items: center;
-        .contain {
-            margin-bottom: 0;
-            height: 100%;
+        background-color: $color-main;
+        ul {
             list-style: none;
             display: flex;
-            align-items: center;
+            margin-bottom: 0;
             li {
-                height: 100%;
-                display: inline-block;
                 width: 20%;
                 text-align: center;
-
                 a {
                     display: block;
-                    line-height: $height-header-nav;
-                    font-size: 2rem;
-                    font-weight: 500;
                     color: $color-white;
-                    text-decoration: none;
+                    font-size: $fs-2;
                     text-transform: uppercase;
+                    line-height: $height-header-nav;
                 }
             }
             li:hover {
-                background-color: $color-green-hover;
+                background-color: #207104;
             }
         }
     }

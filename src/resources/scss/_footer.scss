@@ -6,7 +6,7 @@
     background-color: #f5f1f1;
     padding-bottom: 24px;
     .contain-why {
-        background-color: $color-green;
+        background-color: $color-main;
         padding: 12px;
         .why-item {
             display: flex;
@@ -23,12 +23,12 @@
                 margin-bottom: 8px;
                 @include width_height(40px, 40px);
                 i {
-                    font-size: 2rem;
-                    color: $color-green;
+                    font-size: $fs-2;
+                    color: $color-main;
                 }
             }
             span {
-                font-size: 1.4rem;
+                font-size: $fs-1-4;
                 color: $color-white;
             }
         }
@@ -36,7 +36,7 @@
 
     .box-footer {
         h3 {
-            font-size: 2rem;
+            font-size: $fs-2;
             font-weight: 800;
             margin-bottom: 20px;
         }
@@ -46,7 +46,7 @@
                     margin-right: 10px;
                 }
                 color: #000;
-                font-size: 1.6rem;
+                font-size: $fs-1-8;
                 margin-bottom: 10px;
                 a {
                     text-decoration: none;
@@ -63,7 +63,7 @@
 
     .social-item-pay {
         height: 60px;
-        background-color: $color-green;
+        background-color: $color-main;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -83,30 +83,15 @@
                 a {
                     color: $color-black;
                     i {
-                        font-size: 1.5rem;
+                        font-size: $fs-1-4;
                     }
                 }
             }
         }
         p {
             color: $color-white;
-            font-size: 1.4rem;
+            font-size: $fs-1-4;
             margin: 0;
-        }
-        .pay-list {
-            .pay-item {
-                margin: 0 12px;
-                border-radius: 5px;
-                background-color: $color-white;
-                width: 30px;
-                height: 30px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                img {
-                    max-width: 20px;
-                }
-            }
         }
     }
 }

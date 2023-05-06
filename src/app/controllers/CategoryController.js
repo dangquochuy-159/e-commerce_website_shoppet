@@ -47,13 +47,13 @@ class CategoryController {
             .catch(next);
     }
 
-    //[PUT] /admin/danh-sach/loai-san-pham/:id
+    //[PUT] /admin/sua/loai-san-pham/:id
     updateCategory(req, res, next) {
         Category.updateOne({ category_ID: req.params.id }, req.body)
             .then(() => res.redirect("/admin/danh-sach/loai-san-pham"))
             .catch(next);
     }
-    //[DELETE] /admin/danh-sach/loai-san-pham/:id
+    //[DELETE] /admin/xoa/loai-san-pham/:id
     deleteCategory(req, res, next) {
         Category.deleteOne({ category_ID: req.params.id })
             .then(() => res.redirect("back"))

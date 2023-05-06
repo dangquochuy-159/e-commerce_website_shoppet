@@ -1,0 +1,126 @@
+<div class="row contain-detail">
+    <div class="col col-4">
+        <div class="img">
+            <img src="{{product.image}}" alt="">
+        </div>
+    </div>
+    <div class="col col-8 info-product">
+        <h1 class="name-product">{{product.name}}</h1>
+        <p class="des-product">{{product.des}}</p>
+        {{#if product.salePrice}}
+        <p class="price">{{convertPrice product.salePrice}}</p>
+        <p class="price-old">{{convertPrice product.price}}</p>
+        {{else}}
+        <p class="price">{{convertPrice product.price}}</p>
+        {{/if}}
+        <div class="btn-detail">
+            <button class="btn btn-primary btn-cart" data-id="{{product.product_ID}}">Thêm vào giỏ hàng</button>
+            <button class="btn btn-primary btn-buy" data-id="{{product.product_ID}}">Mua hàng</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="relate-product">
+    <p class="title">SẢN PHẨM LIÊN QUAN</p>
+    <div class="row product_list">
+        {{#each productList}}
+        <div class="card col">
+            <a href="/chi-tiet/{{this.slug}}">
+
+                <img src="{{this.image}}" class="card-img-top" alt="...">
+            </a>
+            <div class="body" style="min-height:150px !important">
+
+                <div id="hover-box" style="display: none;"></div>
+                <a href="/chi-tiet/{{this.slug}}" class="text-center card-title text-name"
+                    data-id="{{this.name}}">{{this.name}}</a>
+                {{#if this.salePrice}}
+                <p class="text-center card-text text-salePrice">{{convertPrice this.salePrice}}</p>
+                <p class="text-center card-text text-price price-old">{{convertPrice this.price}}</p>
+                {{else}}
+                <p class="text-center card-text text-price">{{convertPrice this.price}}</p>
+                {{/if}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="add-product-cart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Thông báo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn chưa đăng nhập! <br>
+                Tiến hành đăng nhập để tiếp tục
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" id="btn-login" class="btn btn-primary">Đăng nhập ngay</button>
+            </div>
+        </div>
+    </div>
+</div>
+<form name="form-add-cart" method="POST"></form>
+<form name="form-buy-product" method="GET"></form>
+
+
+
+<script type="text/javascript">
+    const addCartForm = document.forms['form-add-cart']
+    const buyProductForm = document.forms['form-buy-product']
+    const listBtnCart = document.querySelectorAll('.btn-cart');
+    const listBtnBuy = document.querySelectorAll('.btn-buy');
+
+    // Slider Product
+    $(document).ready(function () {
+        $(".product_list").slick({
+            autoplay: false,
+            speed: 300,
+            infinite: true,
+            slidesToShow: 5,
+            slidesToScroll: 5,
+            arrows: false,
+        });
+    })
+</script>
+
+
+{{#if session.customerID}}
+<script type="text/javascript">
+    Array.from(listBtnCart).forEach(function (btnCart) {
+        btnCart.onclick = function () {
+            productID = this.getAttribute('data-id');
+            console.log('productID: ', productID)
+            addCartForm.action = '/them/gio-hang/' + productID
+            addCartForm.submit()
+        }
+    })
+
+    Array.from(listBtnBuy).forEach(function (btnBuy) {
+        btnBuy.onclick = function () {
+            productID = this.getAttribute('data-id');
+            buyProductForm.action = '/thanh-toan/san-pham/' + productID
+            buyProductForm.submit()
+        }
+    })
+</script>
+{{else}}
+<script type="text/javascript">
+    Array.from(listBtnCart).forEach(function (btnCart) {
+        btnCart.setAttribute('data-bs-toggle', 'modal');
+        btnCart.setAttribute('data-bs-target', '#add-product-cart');
+    })
+
+    Array.from(listBtnBuy).forEach(function (btnBuy) {
+        btnBuy.setAttribute('data-bs-toggle', 'modal');
+        btnBuy.setAttribute('data-bs-target', '#add-product-cart');
+    })
+</script>
+{{/if}}

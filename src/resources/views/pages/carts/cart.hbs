@@ -1,0 +1,139 @@
+<head>
+    <link rel="stylesheet" href="/icon/fontawesome-free-6.4.0-web/css/all.min.css">
+    {{!-- bootstrap --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<div class="container mt-header-30">
+    <p class="text-left p_title">GIỎ HÀNG </p>
+    {{#if session.customerID}}
+    <form name="container-form" method="GET" action="/thanh-toan/gio-hang">
+        <div class="contain-table">
+            <table class="table mt-4 table-cart table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center check" scope="col">
+                            <div>
+                                <input type="checkbox" value="" id="checkbox-all">
+                            </div>
+                        </th>
+                        <th class="text-center" scope="col">Tên</th>
+                        <th class="text-center" scope="col">Ảnh</th>
+                        <th class="text-center" scope="col">Số lượng</th>
+                        <th class="text-center" scope="col">Giá</th>
+                        <th class="text-center" scope="col">Thành tiền</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each cart}}
+                    {{#if (compare this.id_customer ../session.customerID)}}
+                    <tr>
+                        <td class="text-center check">
+                            <div>
+                                <input type="checkbox" name="productIds[]" value="{{this.cart_ID}}" id=""
+                                    data-id="{{this.price_product}}">
+                            </div>
+                        </td>
+                        <td class="text-center" scope="row">{{this.name_product}}</td>
+                        <td class="text-center">
+                            <div class="avt-admin">
+                                <img class="image" src="{{this.image_product}}" alt="">
+                            </div>
+                        </td>
+                        <td class="text-center">{{this.quantity}}</td>
+                        <td class="text-center price-product">{{{convertPrice this.price_product}}}</td>
+
+                        <td class="text-center">{{{convertPrice (multiplication this.price_product
+                            this.quantity)}}}
+                        </td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-primary btn-delete-product"
+                                data-id="{{this.cart_ID}}">Xóa</button>
+                        </td>
+                    </tr>
+                    {{else}}
+
+                    {{/if}}
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <button id="btn-pay" type="submit" disabled>Thanh toán</button>
+    </form>
+    {{else}}
+    {{/if}}
+</div>
+
+
+
+{{!-- form delete --}}
+<form name="delete-form" method="POST" class="d-none"></form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let CartId
+        let total = 0
+        const deleteForm = document.forms['delete-form']
+        const getForm = document.forms['container-form']
+        const listBtnDel = document.querySelectorAll('.btn-delete-product')
+        const sumMoney = document.getElementById('sum-money');
+        const btnPay = document.getElementById('btn-pay');
+        const checkboxAll = document.querySelector('#checkbox-all')
+        const ItemCheckbox = document.querySelectorAll('input[name="productIds[]"]')
+
+        //checkboxAll change
+        checkboxAll.onchange = function () {
+            let isCheckedAll = this.checked
+            Array.from(ItemCheckbox).forEach(function (itemCheck) {
+                itemCheck.checked = isCheckedAll
+            })
+            renderCheckAllSunmitBtn()
+        }
+
+        //ProductItemCheckbox change
+        Array.from(ItemCheckbox).forEach(function (itemCheck) {
+            let isCheck = this.checked
+            itemCheck.onchange = function (e) {
+                e.checked = !isCheck
+                if (countChecked() === ItemCheckbox.length) {
+                    checkboxAll.checked = true
+                } else {
+                    checkboxAll.checked = false
+                }
+                renderCheckAllSunmitBtn()
+            }
+        })
+
+        //Lấy ra id của sản phẩm mỗi khi click vào button xóa trên sản phẩm
+        Array.from(listBtnDel).forEach(function (btnDelete) {
+            btnDelete.onclick = function () {
+                CartId = this.getAttribute('data-id');
+                deleteForm.action = '/xoa/gio-hang/' + CartId + '?_method=DELETE'
+                deleteForm.submit()
+            }
+        })
+
+        //render lại cái btn thanh toán
+        function renderCheckAllSunmitBtn() {
+            let checkedCount = countChecked()
+            if (checkedCount > 0) {
+                btnPay.disabled = false
+            } else {
+                btnPay.disabled = true
+            }
+        }
+
+        function countChecked() {
+            let checkedCount = 0
+            Array.from(ItemCheckbox).forEach((itemcheck) => {
+                if (itemcheck.checked === true) {
+                    return checkedCount += 1
+                }
+            })
+            return checkedCount
+        }
+    })
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>

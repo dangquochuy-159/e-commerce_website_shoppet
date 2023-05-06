@@ -1,0 +1,93 @@
+<style>
+    .avt-admin img {
+        width: 50px;
+        height: 50px;
+    }
+</style>
+
+<h1>Thanh toán</h1>
+<div class="mt-4">
+    {{#if cart}}
+    {{!-- cart --}}
+    <form method="POST" action="/xac-nhan/thanh-toan/gio-hang">
+        <div class="form-group">
+            <label for="name_customer">Tên khách hàng</label>
+            <input type="text" class="form-control" id="name_customer" name="name_customer" />
+        </div>
+        <div class="form-group">
+            <label for="address">Địa chỉ</label>
+            <input type="text" class="form-control" id="address" name="address" />
+        </div>
+        <div class="form-group">
+            <label for="phone">Số điện thoại</label>
+            <input type="tel" class="form-control" pattern="[0-9]{10}" id="phone" name="phone" />
+        </div>
+        <label for="phone">Sản phẩm thanh toán</label>
+        <div class="form-group d-flex">
+            {{#each cart}}
+            <div class="avt-admin me-4 text-center">
+                <img src="{{this.image_product}}" alt="">
+                <span> X {{this.quantity}}</span>
+                <p>{{this.name_product}}</p>
+            </div>
+            <input type="hidden" class="form-control" id="cart_ID" name="cart_ID" value="{{this.cart_ID}}"
+                data-id="{{this.cart_ID}}" />
+            <input type="hidden" class="form-control" id="id_product" name="id_product" value="{{this.id_product}}" />
+            {{/each}}
+            <input type="hidden" class="form-control" id="total_order" name="total_order" value="{{totalMoney cart}}" />
+        </div>
+        <div class="form-group">
+            <label for="total_money">Tổng Tiền</label>
+            <input type="text" class="form-control" id="total_money" name="" value="{{convertPrice (totalMoney cart)}}đ"
+                disabled />
+        </div>
+        <button type="submit" class="btn btn-primary">Xác nhận thanh toán</button>
+    </form>
+    {{else}}
+    {{!-- product --}}
+    <form method="POST" action="/xac-nhan/thanh-toan/san-pham">
+        <div class="form-group">
+            <label for="name_customer">Tên khách hàng</label>
+            <input type="text" class="form-control" id="name_customer" name="name_customer" />
+        </div>
+        <div class="form-group">
+            <label for="address">Địa chỉ</label>
+            <input type="text" class="form-control" id="address" name="address" />
+        </div>
+        <div class="form-group">
+            <label for="phone">Số điện thoại</label>
+            <input type="tel" class="form-control" pattern="[0-9]{10}" id="phone" name="phone" />
+        </div>
+        <label for="phone">Sản phẩm thanh toán</label>
+        <div class="form-group d-flex">
+
+            <div class="avt-admin me-4 text-center">
+                <img src="{{product.image}}" alt="">
+                <span> X 1</span>
+                <p>{{product.name}}</p>
+            </div>
+            <input type="hidden" class="form-control" id="id_product" name="id_product"
+                value="{{product.product_ID}}" />
+
+            {{#if product.salePrice}}
+            <input type="hidden" class="form-control" id="total_order" name="total_order"
+                value="{{product.salePrice}}" />
+            <div class="form-group">
+                <label for="total_money">Tổng Tiền</label>
+                <input type="text" class="form-control" id="total_money" name="" value="{{product.salePrice}}đ"
+                    disabled />
+            </div>
+
+            {{else}}
+            <input type="hidden" class="form-control" id="total_order" name="total_order" value="{{product.price}}" />
+            <div class="form-group">
+                <label for="total_money">Tổng Tiền</label>
+                <input type="text" class="form-control" id="total_money" name="" value="{{product.price}}đ" disabled />
+            </div>
+            {{/if}}
+
+        </div>
+        <button type="submit" class="btn btn-primary">Thanh toán</button>
+    </form>
+    {{/if}}
+</div>

@@ -1,0 +1,36 @@
+@import 'base';
+@import 'table';
+
+.contain-info {
+    border-radius: 50px;
+    border: 5px solid $color-main;
+    padding: 20px;
+    height: 400px;
+    margin-bottom: 20px;
+    .info-account {
+        width: 100%;
+        .avata {
+            img {
+                border-radius: 50%;
+                width: 100px;
+            }
+        }
+        .info {
+            p {
+                font-size: $fs-2;
+                span {
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+    .button-list {
+        button {
+            background-color: $color-main;
+            border: none;
+            height: 42px;
+            min-width: 100px;
+            font-size: $fs-2;
+        }
+    }
+}

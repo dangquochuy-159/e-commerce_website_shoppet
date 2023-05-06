@@ -62,14 +62,14 @@ class ProductController {
             })
             .catch(next)
     }
-    //[PUT] /admin/danh-sach/san-pham/:id
+    //[PUT] /admin/sua/san-pham/:id
     updateProduct(req, res, next) {
         Product.updateOne({ product_ID: req.params.id }, req.body)
             .then(() => res.redirect("/admin/danh-sach/san-pham"))
             .catch(next);
     }
 
-    //[DELTE] /admin/danh-sach/san-pham/:id
+    //[DELTE] /admin/xoa/san-pham/:id
     deleteProduct(req, res, next) {
         Product.deleteOne({ product_ID: req.params.id })
             .then(() => res.redirect("back"))

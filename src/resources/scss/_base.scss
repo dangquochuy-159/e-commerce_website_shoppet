@@ -1,11 +1,11 @@
-//reset css
+//begin reset css
 * {
     box-sizing: inherit;
 }
 
 html {
     font-size: 62.5%;
-    line-height: 1.6rem;
+    line-height: 2rem;
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
@@ -15,32 +15,86 @@ body {
 }
 ul {
     list-style: none;
-    padding-left: 0;
-}
-
-.container,
-.container-fluid {
     padding-left: 0 !important;
-    padding-right: 0 !important;
 }
+//end reset
 
-//height - width
+//begin height - width
 @mixin width_height($width, $height) {
     width: $width;
     height: $height;
 }
 $height-number: 150;
 $height-header: ($height-number + px);
-// $height-header-search: 105px;
 $height-header-search: $height-number * 0.7 + px;
-
 $height-header-nav: $height-number * 0.3 + px;
+// end begin
 
-// color:
-$color-green: #269d00;
-$color-green-hover: #2ca603;
+// begin color:
+$color-main: #269d00;
 $color-white: #fff;
 $color-black: #000;
 
-//font-size
-$fs-text: 1.6rem;
+//end color
+
+//begin font
+$fs-1-8: 1.8rem;
+$fs-1-4: 1.4rem;
+$fs-2: 2rem;
+$fs-2-5: 2.5rem;
+$fs-3: 3rem;
+
+//end font
+
+//begin class
+.container,
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+.margin-top-header {
+    margin-top: $height-header;
+}
+
+.p_title {
+    color: $color-main;
+    margin: 50px 0;
+    text-transform: uppercase;
+    font-size: $fs-3;
+    font-weight: 700;
+    position: relative;
+    z-index: 3;
+    margin: 20px 0;
+}
+.image {
+    width: 50px;
+    height: 50px;
+}
+
+.mt-header-30 {
+    margin-top: $height-number + 30 + px !important;
+}
+
+.button-base {
+    margin: 20px 0;
+    height: 42px;
+    width: 140px;
+    background-color: red;
+    font-size: $fs-2;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    a {
+        text-decoration: none;
+        color: #fff;
+    }
+}
+.button-base:hover {
+    background-color: blue;
+}
+
+//end class
+
+//begin extend
+
+//end extend
