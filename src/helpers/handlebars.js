@@ -3,6 +3,7 @@ const Handlebars = require('handlebars');
 module.exports = {
     sum: (number) => number + 1,
     convertPrice: (price) => {
+        if (!price) return;
         // if (!number) return
         return `${price.toLocaleString('en-US')}đ`;
     },

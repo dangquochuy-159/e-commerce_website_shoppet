@@ -4,19 +4,21 @@
 
 
 <div class="container-fluid ">
-    <div class="row">
-        <div class="col col-2">
+    <div class="row  m-lr-0">
+        <div class="col col-2 p-lr-0">
             {{> menuAdmin}}
         </div>
-        <div class="col col-10">
-            <h1>Sửa SẢN PHẨM</h1>
-            <div class="mt-4">
+        <div class="col col-10 p-lr-0 dashboard">
+            <div class="heading">
+                <p>Sửa sản phẩm</p>
+            </div>
+            <div class="mt-4 product">
                 <form method="POST" action="/admin/sua/san-pham/{{product.product_ID}}?_method=PUT">
                     <div class="form-group">
                         <label for="name">Tên sản phẩm</label>
                         <input type="text" class="form-control" id="name" name="name" value="{{product.name}}" />
                     </div>
-
+                    <label for="name">Chọn danh mục</label>
                     <select class="form-control form-control-sm checkbox-select-all-options" name="categoryID">
 
                         {{#each category}}
@@ -52,7 +54,7 @@
                         <input type="text" class="form-control" id="image" name="image" value="{{product.image}}" />
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Sửa</button>
+                    <button type="submit" class="btn btn-primary button-base">Sửa</button>
                 </form>
             </div>
         </div>

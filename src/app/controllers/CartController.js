@@ -104,6 +104,7 @@ class CartController {
     payCart(req, res, next) {
         Cart.find({ cart_ID: { $in: req.query.productIds } })
             .then((cart) => {
+                res.locals.session = req.session;
                 res.render("pages/carts/cart_pay", {
                     cart: mutipleMongooseToObject(cart)
                 })
@@ -155,6 +156,7 @@ class CartController {
     payProduct(req, res, next) {
         Product.findOne({ product_ID: req.params.id })
             .then((product) => {
+                res.locals.session = req.session;
                 res.render("pages/carts/cart_pay", {
                     product: mongooseToObject(product)
                 })
@@ -191,6 +193,7 @@ class CartController {
 
     //[GET] /thanh-toan/thanh-cong
     successPay(req, res, next) {
+        res.locals.session = req.session;
         res.render("pages/carts/successPay")
     }
 }

@@ -6,7 +6,9 @@
 </style>
 
 <h1>Thanh toán</h1>
+
 <div class="mt-4">
+
     {{#if cart}}
     {{!-- cart --}}
     <form method="POST" action="/xac-nhan/thanh-toan/gio-hang">
@@ -41,7 +43,7 @@
             <input type="text" class="form-control" id="total_money" name="" value="{{convertPrice (totalMoney cart)}}đ"
                 disabled />
         </div>
-        <button type="submit" class="btn btn-primary">Xác nhận thanh toán</button>
+        <button type="submit" class="btn btn-primary button-base">Xác nhận thanh toán</button>
     </form>
     {{else}}
     {{!-- product --}}
@@ -87,7 +89,13 @@
             {{/if}}
 
         </div>
-        <button type="submit" class="btn btn-primary">Thanh toán</button>
+        <button type="submit" class="btn btn-primary button-base">Thanh toán</button>
     </form>
     {{/if}}
+
+    <div class="back-page">
+        <a href="javascript:history.back()">
+            Quay lại
+        </a>
+    </div>
 </div>
