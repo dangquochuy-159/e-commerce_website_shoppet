@@ -14,6 +14,7 @@ const AdminSchema = new Schema(
         user_name: { type: String },
         password: { type: String },
         image: { type: String },
+        allowRegister: { type: Boolean },
         slug: { type: String, slug: "name", unique: true },
     },
     {

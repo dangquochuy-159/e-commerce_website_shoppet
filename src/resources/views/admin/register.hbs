@@ -8,7 +8,7 @@
 
 
 <div class="login_register-form">
-    <form class="form" method="POST" action="/admin/kiem-tra-dang-ky">
+    <form class="form" method="POST" action="/admin/kiem-tra-dang-ky" name="register-form">
         <h3>Đăng ký tài khoản</h3>
         <div class="form-input">
             <div class="mb-3">
@@ -19,23 +19,59 @@
                 <label for="user_name" class="form-label">Tên đăng nhập</label>
                 <input type="email" class="form-control" id="user_name" name="user_name" />
             </div>
+
             <div class="mb-3">
                 <label for="password" class="form-label">Mật khẩu</label>
                 <input type="password" class="form-control" id="password" name="password" />
             </div>
             <div class="mb-3">
+                <label for="confirm_pass" class="form-label">Xác nhận mật khẩu</label>
+                <input type="password" class="form-control" id="confirm_pass" name="confirm_pass" />
+                <span class="msg_err"></span>
+            </div>
+            <div class="mb-3">
                 <label for="image" class="form-label">Ảnh</label>
                 <input type="text" class="form-control" id="image" name="image" />
             </div>
-        </div>
-        <div class="btn-list">
-            <button type="submit" class="btn btn-primary  btn-submit">Đăng ký</button>
-        </div>
-        <div class="back">
-            <a href="javascript:history.back()">
-                Quay lại
-                <i class="fa-solid fa-house"></i>
-            </a>
-        </div>
+
+            <input type="text" class="form-control" id="image" name="allowRegister" value="false" hidden />
+
+            <div class="btn-list">
+                <button type="submit" class="btn btn-primary  btn-submit">Đăng ký</button>
+            </div>
+            <div class="back">
+                <a href="javascript:history.back()">
+                    Quay lại
+                    <i class="fa-solid fa-house"></i>
+                </a>
+            </div>
     </form>
 </div>
+
+<script>
+    const formRegister = document.forms['register-form']
+    const messageError = formRegister.querySelector('.msg_err')
+    const btnSubmit = formRegister.querySelector('.btn-submit')
+    const inputPass = formRegister.querySelector('input[name="password"]')
+    const inputConfirmPass = formRegister.querySelector('input[name="confirm_pass"]')
+
+    inputConfirmPass.onblur = function () {
+        if (inputConfirmPass.value !== inputPass.value) {
+            messageError.innerText = "Mật khẩu xác nhận chưa khớp"
+        }
+    }
+    inputConfirmPass.oninput = function () {
+        messageError.innerText = ""
+    }
+
+    formRegister.onsubmit = function (event) {
+
+        if (inputConfirmPass.value === inputPass.value) {
+            formRegister.submit()
+        } else {
+            event.preventDefault();
+        }
+
+    }
+
+</script>

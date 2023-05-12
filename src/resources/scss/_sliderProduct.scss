@@ -91,3 +91,41 @@
     border: 1px solid #ccc;
     box-shadow: 0 0 10px #ccc;
 }
+
+// .slick-prev:before {
+//     content: '<';
+//     color: red;
+//     font-size: 30px;
+// }
+
+// .slick-next:before {
+//     content: '>';
+//     color: red;
+//     font-size: 30px;
+// }
+
+.slick-prev.slick-arrow {
+    display: flex;
+    justify-content: flex-start;
+}
+.slick-next.slick-arrow {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.slick-prev::before {
+    position: absolute;
+    left: -20px;
+    background-color: $color-main;
+    padding: 10px;
+    border-radius: 50%;
+}
+.slick-next::before {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: -20px;
+    background-color: $color-main;
+    padding: 10px;
+    border-radius: 50%;
+}

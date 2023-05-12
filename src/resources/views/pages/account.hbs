@@ -10,9 +10,19 @@
         <p class="text-center p_title">THÔNG TIN TÀI KHOẢN</p>
         {{#if customer}}
         <div class="info-account">
+
+            {{#if customer.image}}
             <div class="avata text-center">
                 <img src="{{customer.image}}" alt="">
             </div>
+            {{else}}
+            <div class="avata text-center">
+                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="">
+            </div>
+            {{/if}}
+
+
+
             <div class="text-center info">
                 <p>
                     <span>Tên:</span>
@@ -64,7 +74,12 @@
                         {{#each order}}
                         <td class="text-center">{{sum @index 1}}</td>
                         <td class="text-center" scope="row">{{{convertDate this.createdAt}}}</td>
-                        <td class="text-center">{{countQuantity this.details}}</td>
+                        {{!-- <td class="text-center">{{countQuantity this.details}}</td> --}}
+
+                        <td class="text-center">{{countProduct this.details}}</td>
+
+
+
                         <td class="text-center price-product">{{{convertPrice this.total_order}}}</td>
                         <td class="text-center">
                             <button class="btn btn-primary btn-detail" type="submit" data-id="{{this.order_ID}}">Chi

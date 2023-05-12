@@ -8,9 +8,6 @@ const route = require("./routes");
 const db = require("./config/db");
 const session = require('express-session');
 const methodOverride = require("method-override");
-// const requireLogin = require('./app/middlewares/requireLogin');
-// const passport = require('./app/middlewares/passport');
-// const sortMiddleware = require("./app/middlewares/checkLoginMiddlewares");
 const app = express()
 const port = 3000
 db.connect();
@@ -23,11 +20,6 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(flash());
-// app.use(requireLogin)
-
-// Use Passport middleware
-// app.use(passport.initialize());
-// app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(morgan('combined'))
@@ -40,8 +32,6 @@ app.use(
         extended: true,
     })
 );
-//custom middleware
-// app.use(sortMiddleware)
 
 app.engine(
     "hbs",

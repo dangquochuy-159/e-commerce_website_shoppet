@@ -52,12 +52,18 @@
                 Order
             </a>
         </li>
+
+        {{#if admin.allowRegister}}
         <li class="menu-item">
             <a class="menu-item_link" href="/admin/dang-ky">
                 <i class="fa-sharp fa-solid fa-pen-nib"></i>
                 Register
             </a>
         </li>
+        {{else}}
+        {{/if}}
+
+
     </ul>
     <div class="log-out text-center">
         <a href="/admin/dang-xuat">

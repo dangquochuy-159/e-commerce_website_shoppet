@@ -28,10 +28,17 @@ module.exports = {
         }
         return total
     },
-    countQuantity: (array) => {
+    countQuantity: () => {
         return array.length
     },
     sumOrder: (object) => {
         return Object.keys(object).length;
+    },
+    countProduct: (array) => {
+        let sum = 0
+        for (let a in array) {
+            sum += array[a].quantity
+        }
+        return sum
     }
 }

@@ -23,14 +23,18 @@
         }
         .form-input {
             label {
-                font-size: $fs-2-5;
+                font-size: $fs-2;
                 font-weight: 500;
             }
-            input {
+            input:not(input[type='checkbox']) {
                 height: 42px;
                 border-radius: 20px;
                 padding: 10px 20px;
                 font-size: $fs-2;
+            }
+            .msg_err {
+                color: red;
+                font-size: 20px;
             }
         }
         .btn-list {
