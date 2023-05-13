@@ -22,10 +22,12 @@
             <div class="mb-3">
                 <label for="password" class="form-label">Mật khẩu</label>
                 <input type="password" class="form-control" id="password" name="password" />
+                <i class="fa-regular fa-eye show-pass"></i>
             </div>
             <div class="mb-3">
                 <label for="confirm_pass" class="form-label">Xác nhận mật khẩu</label>
                 <input type="password" class="form-control" id="confirm_pass" name="confirm_pass" />
+                <i class="fa-regular fa-eye show-pass"></i>
                 <span class="msg_err"></span>
             </div>
             <div class="mb-3">
@@ -51,12 +53,19 @@
     const btnSubmit = formRegister.querySelector('.btn-submit')
     const inputPass = formRegister.querySelector('input[name="password"]')
     const inputConfirmPass = formRegister.querySelector('input[name="confirm_pass"]')
+    const showPass = formRegister.querySelectorAll('.show-pass')
 
-    inputConfirmPass.onblur = function () {
-        if (inputConfirmPass.value !== inputPass.value) {
-            messageError.innerText = "Mật khẩu xác nhận chưa khớp"
+    showPass.forEach((item) => {
+        item.onclick = () => {
+            let input = item.parentElement.querySelector('input')
+            let type = input.type === 'password' ? 'text' : 'password'
+            input.type = type
+            item.classList.toggle('fa-eye');
+            item.classList.toggle('fa-eye-slash');
         }
-    }
+    })
+
+
     inputConfirmPass.oninput = function () {
         messageError.innerText = ""
     }
@@ -66,6 +75,9 @@
         if (inputConfirmPass.value === inputPass.value) {
             formRegister.submit()
         } else {
+
+            messageError.innerText = "Mật khẩu xác nhận chưa khớp"
+
             event.preventDefault();
         }
 

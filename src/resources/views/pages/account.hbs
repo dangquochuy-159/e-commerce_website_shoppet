@@ -101,7 +101,6 @@
 
     Array.from(btnDetailList).forEach(function (btnItem) {
         btnItem.onclick = function () {
-            console.log('click')
             idCustomer = this.getAttribute('data-id');
             deleteForm.action = '/chi-tiet/don-dat-hang/' + idCustomer
             deleteForm.submit()

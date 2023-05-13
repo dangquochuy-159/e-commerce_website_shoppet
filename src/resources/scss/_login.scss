@@ -22,19 +22,28 @@
             font-weight: 800;
         }
         .form-input {
-            label {
-                font-size: $fs-2;
-                font-weight: 500;
-            }
-            input:not(input[type='checkbox']) {
-                height: 42px;
-                border-radius: 20px;
-                padding: 10px 20px;
-                font-size: $fs-2;
-            }
-            .msg_err {
-                color: red;
-                font-size: 20px;
+            div {
+                position: relative;
+                label {
+                    font-size: $fs-2;
+                    font-weight: 500;
+                }
+                input:not(input[type='checkbox']) {
+                    height: 42px;
+                    border-radius: 20px;
+                    padding: 10px 20px;
+                    font-size: $fs-2;
+                }
+                .show-pass {
+                    position: absolute;
+                    top: 45px;
+                    right: 10px;
+                    font-size: 20px;
+                }
+                .msg_err {
+                    color: red;
+                    font-size: 20px;
+                }
             }
         }
         .btn-list {

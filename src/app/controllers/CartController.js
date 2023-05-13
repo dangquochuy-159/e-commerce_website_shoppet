@@ -47,7 +47,7 @@ class CartController {
         let priceProduct
         Promise.all([
             Product.findOne({ product_ID: req.params.id }),
-            Cart.findOne({ id_product: req.params.id })
+            Cart.findOne({ id_product: req.params.id, id_customer: req.session.customerID })
         ])
             .then(([product, cart]) => {
                 if (product.salePrice != null) {
@@ -56,6 +56,11 @@ class CartController {
                     priceProduct = product.price
                 }
                 if (cart) {
+                    console.log("cart.id_customer: ", cart.id_customer)
+                    console.log("req.session.customerID: ", req.session.customerID)
+                    console.log("cart.id_product: ", cart.id_product)
+                    console.log("product.product_ID: ", product.product_ID)
+
                     if (cart.id_customer === req.session.customerID && cart.id_product === product.product_ID) {
                         let sessionCustomer = req.session.customerID
                         let productId = product.product_ID
@@ -65,6 +70,8 @@ class CartController {
                             .then(() => res.redirect("back"))
                             .catch(next);
                     } else {
+                        console.log("else 1")
+
                         const cart = new Cart({
                             id_product: product.product_ID,
                             name_product: product.name,
@@ -81,6 +88,7 @@ class CartController {
                             .catch(next);
                     }
                 } else {
+                    console.log("else 2")
 
                     const cart = new Cart({
                         id_product: product.product_ID,
